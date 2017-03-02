@@ -13,7 +13,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ * @param <T>
+ * @param <ID>
+ */
 public class GenericJdbcRepository<T extends Persistable<ID>, ID extends Serializable> extends AbstractJdbctemplateDao <T, ID>  {
 
 	

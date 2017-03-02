@@ -10,7 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.domain.Persistable;
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ */
 @Entity
 @Table(name="user")
 public class User  	implements Persistable<String>, Serializable {

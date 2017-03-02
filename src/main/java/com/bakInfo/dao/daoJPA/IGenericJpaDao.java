@@ -2,7 +2,13 @@ package com.bakInfo.dao.daoJPA;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ * @param <T>
+ * @param <S>
+ */
 public interface IGenericJpaDao<T extends Serializable, S extends Serializable> {
 
 	T findOne(Class<T> className,final S id);

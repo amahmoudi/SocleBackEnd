@@ -6,7 +6,11 @@ import org.springframework.util.StringUtils;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ */
 public class TableDescription {
 
 	private final String name;

@@ -31,7 +31,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.util.Assert;
 
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ * @param <T>
+ * @param <ID>
+ */
 public abstract class AbstractJdbctemplateDao<T extends Persistable<ID>, ID extends Serializable> implements PagingAndSortingRepository<T, ID>, InitializingBean, BeanFactoryAware {
 
 	public static Object[] pk(Object... idValues) {

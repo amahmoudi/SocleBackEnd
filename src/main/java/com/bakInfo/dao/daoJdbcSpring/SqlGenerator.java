@@ -8,7 +8,11 @@ import java.util.Set;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ */
 public class SqlGenerator {
 
 	public static final String WHERE = " WHERE ";

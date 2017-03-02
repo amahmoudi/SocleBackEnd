@@ -28,7 +28,11 @@ import com.bakInfo.dao.daoJdbcSpring.GenericJdbcRepository;
 import com.bakInfo.dao.daoJdbcSpring.RowUnmapper;
 import com.bakInfo.model.User;
 
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ */
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "com.bakInfo" })

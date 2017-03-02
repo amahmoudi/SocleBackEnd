@@ -8,7 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bakInfo.dao.daoHIB.IGenericHibDao;
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ * @param <T>
+ * @param <S>
+ */
 @Service("genericService")
 @Transactional(rollbackFor = Exception.class)
 class GenericService<T extends Serializable, S extends Serializable>  implements IGenericService<T, S> {

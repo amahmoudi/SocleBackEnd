@@ -5,7 +5,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ * @param <T>
+ * @param <S>
+ */
 public abstract class AbstractJpaDao<T extends Serializable, S extends Serializable> {
 
 	@PersistenceContext

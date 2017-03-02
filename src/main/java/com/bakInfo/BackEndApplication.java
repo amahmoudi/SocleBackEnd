@@ -11,7 +11,11 @@ import com.bakInfo.configuration.AppConfiguration;
 import com.bakInfo.dao.daoJdbcSpring.GenericJdbcRepository;
 import com.bakInfo.model.User;
 import com.bakInfo.service.IGenericService;
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ */
 @SpringBootApplication
 public class BackEndApplication {
 	
