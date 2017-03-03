@@ -25,14 +25,14 @@ public class BackEndApplication {
 		
 		AbstractApplicationContext context  = new AnnotationConfigApplicationContext(AppConfiguration.class);
 		IGenericService<User,String> service = (IGenericService<User,String>) context.getBean("genericService");
-		GenericJdbcRepository<User, String> service2 = (GenericJdbcRepository<User, String>) context.getBean("userRepository");
+		GenericJdbcRepository<User, Integer> service2 = (GenericJdbcRepository<User, Integer>) context.getBean("userRepository");
 		
 		
 		
 		
-		final User entity = new User("baki.mahmoudi@bluescale.com",true,"password@123",true);
+//		final User entity = new User("baki.mahmoudi@bluescale.com",true,"password@123",true);
 		
-		service2.save(entity);
+//		service2.save(entity);
 //		service.create(entity);
 //		final User findAll = service.findOne(User.class,"baki.mahmoudi@bluescale.com");
 //		service.deleteById(User.class, "baki.mahmoudi@bluescale.com");

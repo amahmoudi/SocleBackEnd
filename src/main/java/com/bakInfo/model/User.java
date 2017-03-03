@@ -1,183 +1,198 @@
 package com.bakInfo.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.domain.Persistable;
-/**
- * 
- * @author amahmoudi
- *
- */
+
 @Entity
-@Table(name="user")
-public class User  	implements Persistable<String>, Serializable {
+@Table(name="APP_USER")
+public class User implements Persistable<Integer>, Serializable {
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
 
-	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@NotEmpty
+	@Column(name="SSO_ID", unique=true, nullable=false)
+	private String ssoId;
 	
-	@Column(name="user_email")
-	private String userEmail;
+	@NotEmpty
+	@Column(name="PASSWORD", nullable=false)
+	private String password;
+		
+	@NotEmpty
+	@Column(name="FIRST_NAME", nullable=false)
+	private String firstName;
 
-	@Column(name="user_enabled")
-	private Boolean userEnabled;
+	@NotEmpty
+	@Column(name="LAST_NAME", nullable=false)
+	private String lastName;
 
-	@Column(name="user_password")
-	private String userPassword;
+	@NotEmpty
+	@Column(name="EMAIL", nullable=false)
+	private String email;
+
+	@NotEmpty
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "APP_USER_USER_PROFILE", 
+             joinColumns = { @JoinColumn(name = "USER_ID") }, 
+             inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
+	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+
 	
-	@Column(name="admin_enabled")
-	private boolean adminEnabled;
-
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public User(String userEmail, Boolean userEnabled, String userPassword, boolean adminEnabled) {
-		super();
-		this.userEmail = userEmail;
-		this.userEnabled = userEnabled;
-		this.userPassword = userPassword;
-		this.adminEnabled = adminEnabled;
-	}
-
-
-	public User(Long id, String userEmail, Boolean userEnabled, String userPassword, boolean adminEnabled) {
+	public User(Integer id, String ssoId, String password, String firstName, String lastName, String email,Integer idProfil) {
 		super();
 		this.id = id;
-		this.userEmail = userEmail;
-		this.userEnabled = userEnabled;
-		this.userPassword = userPassword;
-		this.adminEnabled = adminEnabled;
+		this.ssoId = ssoId;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+	
+	
+	public User(Integer id, String ssoId, String password, String firstName, String lastName, String email) {
+		super();
+		this.id = id;
+		this.ssoId = ssoId;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+
+	
+	
+	public User(String ssoId, String password, String firstName, String lastName, String email) {
+		super();
+		this.ssoId = ssoId;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
 	}
 
 
 
-
-	@Override
-	public String getId() {
-		return String.valueOf(id);
+	public Integer getId() {
+		return id;
 	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public String getUserEmail() {
-		return this.userEmail;
+
+	public String getSsoId() {
+		return ssoId;
 	}
 
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+	public void setSsoId(String ssoId) {
+		this.ssoId = ssoId;
 	}
 
-	public Boolean getUserEnabled() {
-		return this.userEnabled;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUserEnabled(Boolean userEnabled) {
-		this.userEnabled = userEnabled;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	
-
-	public String getUserPassword() {
-	    return this.userPassword;
-	}
-	
-	public void setUserPassword(String userPassword) {
-	    this.userPassword = userPassword;
+	public String getFirstName() {
+		return firstName;
 	}
 
-
-
-	public boolean getAdminEnabled() {
-		return adminEnabled;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-
-
-	public void setAdminEnabled(boolean adminEnabled) {
-		this.adminEnabled = adminEnabled;
+	public String getLastName() {
+		return lastName;
 	}
 
-
-
-	@Override
-	public boolean isNew() {
-		return id==null;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Set<UserProfile> getUserProfiles() {
+		return userProfiles;
+	}
+
+	public void setUserProfiles(Set<UserProfile> userProfiles) {
+		this.userProfiles = userProfiles;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (adminEnabled ? 1231 : 1237);
-		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
-		result = prime * result + ((userEnabled == null) ? 0 : userEnabled.hashCode());
-		result = prime * result + ((userPassword == null) ? 0 : userPassword.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((ssoId == null) ? 0 : ssoId.hashCode());
 		return result;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof User))
 			return false;
 		User other = (User) obj;
-		if (adminEnabled != other.adminEnabled)
-			return false;
-		if (userEmail == null) {
-			if (other.userEmail != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!userEmail.equals(other.userEmail))
+		} else if (!id.equals(other.id))
 			return false;
-		if (userEnabled == null) {
-			if (other.userEnabled != null)
+		if (ssoId == null) {
+			if (other.ssoId != null)
 				return false;
-		} else if (!userEnabled.equals(other.userEnabled))
-			return false;
-		if (userPassword == null) {
-			if (other.userPassword != null)
-				return false;
-		} else if (!userPassword.equals(other.userPassword))
+		} else if (!ssoId.equals(other.ssoId))
 			return false;
 		return true;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/*
+	 * DO-NOT-INCLUDE passwords in toString function.
+	 * It is done here just for convenience purpose.
 	 */
 	@Override
 	public String toString() {
-		return String.format("User [userEmail=%s, userEnabled=%s, userPassword=%s, adminEnabled=%s]", userEmail,
-				userEnabled, userPassword, adminEnabled);
+		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
+				+ ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + "]";
 	}
 
+	@Override
+	public boolean isNew() {
+		return id==null;
+	}
 
-	
 }
