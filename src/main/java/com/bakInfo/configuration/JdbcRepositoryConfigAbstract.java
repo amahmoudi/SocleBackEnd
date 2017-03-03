@@ -13,7 +13,7 @@ import com.bakInfo.model.User;
 public abstract class JdbcRepositoryConfigAbstract {
 	@Bean
 	public GenericJdbcRepository<User, Integer> userRepository() {
-		return new GenericJdbcRepository(null, null, "user", "id");
+		return new GenericJdbcRepository(null, null, "APP_USER", "id");
 	}
 	
 }

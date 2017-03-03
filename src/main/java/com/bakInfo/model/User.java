@@ -50,6 +50,11 @@ public class User implements Persistable<Integer>, Serializable {
 	@Column(name="EMAIL", nullable=false)
 	private String email;
 
+
+	@NotEmpty
+	@Column(name="USER_PROFILE_ID", nullable=false)
+	private Integer idProfil;
+	
 	@NotEmpty
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "APP_USER_USER_PROFILE", 
@@ -58,6 +63,12 @@ public class User implements Persistable<Integer>, Serializable {
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
 	
+	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public User(Integer id, String ssoId, String password, String firstName, String lastName, String email,Integer idProfil) {
 		super();
 		this.id = id;
@@ -66,28 +77,17 @@ public class User implements Persistable<Integer>, Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.idProfil=idProfil;
 	}
 	
-	
-	public User(Integer id, String ssoId, String password, String firstName, String lastName, String email) {
-		super();
-		this.id = id;
-		this.ssoId = ssoId;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-	}
-
-	
-	
-	public User(String ssoId, String password, String firstName, String lastName, String email) {
+	public User(String ssoId, String password, String firstName, String lastName, String email, Integer idProfil) {
 		super();
 		this.ssoId = ssoId;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.idProfil = idProfil;
 	}
 
 
@@ -146,6 +146,22 @@ public class User implements Persistable<Integer>, Serializable {
 
 	public void setUserProfiles(Set<UserProfile> userProfiles) {
 		this.userProfiles = userProfiles;
+	}
+
+	
+	
+	/**
+	 * @return the idProfil
+	 */
+	public Integer getIdProfil() {
+		return idProfil;
+	}
+
+	/**
+	 * @param idProfil the idProfil to set
+	 */
+	public void setIdProfil(Integer idProfil) {
+		this.idProfil = idProfil;
 	}
 
 	@Override

@@ -44,10 +44,10 @@ public class JdbcRepositoryConfig extends JdbcRepositoryConfigAbstract {
 						mapping.put("FIRST_NAME", t.getFirstName());
 						mapping.put("LAST_NAME", t.getLastName());
 						mapping.put("EMAIL", t.getEmail());
-						mapping.put("USER_PROFILE_ID", 0);
+						mapping.put("USER_PROFILE_ID", t.getIdProfil());
 						return mapping;
 					}
-				}, "user", "id");
+				}, "APP_USER", "id");
 		
 		return genericJdbcRepository;
 	}

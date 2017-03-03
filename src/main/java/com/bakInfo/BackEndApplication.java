@@ -30,9 +30,9 @@ public class BackEndApplication {
 		
 		
 		
-//		final User entity = new User("baki.mahmoudi@bluescale.com",true,"password@123",true);
+		final User entity = new User(1,"aa", "aa", "aa", "aa", "aa", 1);
 		
-//		service2.save(entity);
+		service2.save(entity);
 //		service.create(entity);
 //		final User findAll = service.findOne(User.class,"baki.mahmoudi@bluescale.com");
 //		service.deleteById(User.class, "baki.mahmoudi@bluescale.com");
