@@ -17,7 +17,11 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.domain.Persistable;
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ */
 @Entity
 @Table(name="APP_USER")
 public class User implements Persistable<Integer>, Serializable {
@@ -57,7 +61,7 @@ public class User implements Persistable<Integer>, Serializable {
 	
 	@NotEmpty
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "APP_USER_USER_PROFILE", 
+	@JoinTable(name = "USER_PROFILE", 
              joinColumns = { @JoinColumn(name = "USER_ID") }, 
              inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();

@@ -10,7 +10,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.bakInfo.dao.daoJdbcSpring.GenericJdbcRepository;
 import com.bakInfo.dao.daoJdbcSpring.RowUnmapper;
+import com.bakInfo.model.PersistentLogin;
 import com.bakInfo.model.User;
+import com.bakInfo.model.UserProfile;
 /**
  * 
  * @author amahmoudi
@@ -49,6 +51,60 @@ public class JdbcRepositoryConfig extends JdbcRepositoryConfigAbstract {
 					}
 				}, "APP_USER", "id");
 		
+		return genericJdbcRepository;
+	}
+	
+	@Override
+	public GenericJdbcRepository<PersistentLogin, Integer> PersistentLoginRepository() {
+		GenericJdbcRepository<PersistentLogin, Integer> genericJdbcRepository = new GenericJdbcRepository<PersistentLogin, Integer>(new RowMapper<PersistentLogin>() {
+
+			@Override
+			public PersistentLogin mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				return new PersistentLogin(rs.getInt("id"),rs.getString("series"), rs.getString("USERNAME"), rs.getString("TOKEN"), rs.getDate("last_used"));
+			}
+
+			
+		}, new RowUnmapper<PersistentLogin>() {
+
+			@Override
+			public Map<String, Object> mapColumns(PersistentLogin t) {
+
+				Map<String, Object> mapping = new LinkedHashMap<String, Object>();
+				mapping.put("id", t.getId());
+				mapping.put("series", t.getSeries());
+				mapping.put("USERNAME", t.getUsername());
+				mapping.put("TOKEN", t.getToken());
+				mapping.put("last_used", t.getLast_used());
+				return mapping;
+			}
+
+			
+		}, "PERSISTENT_LOGINS", "id");
+		return genericJdbcRepository;
+	}
+	
+	@Override
+	public GenericJdbcRepository<UserProfile, Integer> UserProfileRepository() {
+		GenericJdbcRepository<UserProfile, Integer> genericJdbcRepository = new GenericJdbcRepository<>(new RowMapper<UserProfile>() {
+
+			@Override
+			public UserProfile mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new UserProfile(rs.getInt("id"), rs.getString("type"));
+			}
+
+			
+		}, new RowUnmapper<UserProfile>() {
+
+			@Override
+			public Map<String, Object> mapColumns(UserProfile t) {
+				Map<String, Object> mapping = new LinkedHashMap<String, Object>();
+				mapping.put("id", t.getId());
+				mapping.put("type", t.getType());
+				return mapping;
+			}
+			
+		}, "USER_PROFILE", "id");
 		return genericJdbcRepository;
 	}
 }

@@ -1,7 +1,11 @@
 package com.bakInfo.model;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author amahmoudi
+ *
+ */
 public enum UserProfileType implements Serializable{
 	USER("USER"),
 	DBA("DBA"),

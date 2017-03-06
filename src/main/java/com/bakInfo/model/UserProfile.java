@@ -9,9 +9,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.domain.Persistable;
+/**
+ * 
+ * @author amahmoudi
+ *
+ */
 @Entity
 @Table(name="USER_PROFILE")
-public class UserProfile implements Serializable{
+public class UserProfile implements Persistable<Integer>, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;	
@@ -19,6 +30,22 @@ public class UserProfile implements Serializable{
 	@Column(name="TYPE", length=15, unique=true, nullable=false)
 	private String type = UserProfileType.USER.getUserProfileType();
 	
+	public UserProfile() {
+		super();
+	}
+	
+	public UserProfile(String type) {
+		super();
+		this.type = type;
+	}
+
+
+	public UserProfile(Integer id, String type) {
+		super();
+		this.id = id;
+		this.type = type;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -69,6 +96,12 @@ public class UserProfile implements Serializable{
 	@Override
 	public String toString() {
 		return "UserProfile [id=" + id + ", type=" + type + "]";
+	}
+
+	@Override
+	public boolean isNew() {
+		// TODO Auto-generated method stub
+		return id==null;
 	}
 
 
